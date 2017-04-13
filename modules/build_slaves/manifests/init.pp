@@ -13,6 +13,7 @@ class build_slaves (
   define build_slaves::remove_users ($user = $title) {
     exec { "remove_${user}":
       command => 'userdel -f ${user} && rm -rf /home/${user}',
+      provider => shell,
       onlyif  => 'grep -c ${user} /etc/passwd'
     }
   }
