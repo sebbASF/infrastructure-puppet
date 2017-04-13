@@ -5,11 +5,13 @@ class build_slaves (
   $old_users =['eli', 'jlowe', 'rvs', 'tedyu', 'tmary', 'tucu', 'cos', 'evans', 'jfarrell', 'michim', 'shv', 'tgravas', 'todd', 'wang'],
   ) {
 
+  require build_slaves
+
   class { "build_slaves::install::${::asfosname}::${::asfosrelease}":
   }
 
   define build_slaves::remove_users ($user = $title) {
-    exec { 'remove_old_users':
+    exec { "remove_${user}":
       command => 'userdel -f ${user} && rm -rf /home/${user}',
       onlyif  => 'grep -c ${user} /etc/passwd'
     }
