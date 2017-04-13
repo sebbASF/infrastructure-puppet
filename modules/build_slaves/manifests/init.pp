@@ -16,7 +16,7 @@ class build_slaves (
 	exec { "remove-old-accounts":
 		command => 'for i in eli jlowe rvs tedyu tmary tucu cos evans jfarrell michim shv tgravas todd wang; do /bin/grep -c $i /etc/passwd && /usr/sbin/userdel -f $i && /bin/rm -rf /home/$i; done',
 		provider => shell,
-		onlyif => /bin/grep -c eli /etc/passwd,
+		onlyif => '/bin/grep -c eli /etc/passwd',
 	}
 
   package {
