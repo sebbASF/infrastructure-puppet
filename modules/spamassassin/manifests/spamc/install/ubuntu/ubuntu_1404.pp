@@ -1,6 +1,6 @@
-#/etc/puppet/modules/spamassassin/manifests/spamc/install/ubuntu/1404.pp
+#/etc/puppet/modules/spamassassin/manifests/spamc/install/ubuntu/ubuntu_1404.pp
 
-class spamassassin::spamc::install::ubuntu::1404 (
+class spamassassin::spamc::install::ubuntu::ubuntu_1404 (
 
   $spamd_peers           = '',
   $haproxy_maxconns      = '',

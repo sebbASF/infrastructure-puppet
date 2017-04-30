@@ -4,9 +4,13 @@ classes:
   - apache::mod::expires
   - apache::mod::ssl
   - apache::mod::wsgi
+  - datadog_agent::integrations::apache
+  - datadog_agent::integrations::http_check
+  - loggy
   - python
   - ssl::name::wildcard_apache_org
   - vhosts_asf::vhosts
+  - zmanda_asf::client
 
 apache::default_vhost: false
 apache::mpm_module: 'event'

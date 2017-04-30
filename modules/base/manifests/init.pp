@@ -90,6 +90,6 @@ class base (
   $tcinstall = hiera_hash('tomcat::install',{})
   create_resources(tomcat::install, $tcinstall)
 
-  class { "base::install::${::asfosname}::${::asfosrelease}":
+  class { "base::install::${::asfosname}::${asfosname}_${::asfosrelease}":
   }
 }

@@ -4,7 +4,7 @@ class build_slaves (
   $distro_packages  = [],
   ) {
 
-  class { "build_slaves::install::${::asfosname}::${::asfosrelease}":
+  class { "build_slaves::install::${::asfosname}::${asfosname}_${::asfosrelease}":
   }
 
   package {

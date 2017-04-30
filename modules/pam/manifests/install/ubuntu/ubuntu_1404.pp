@@ -1,6 +1,6 @@
-#/etc/puppet/modules/pam/install/ubuntu/1604.pp
+#/etc/puppet/modules/pam/install/ubuntu/ubuntu_1404.pp
 
-class pam::install::ubuntu::1604 (
+class pam::install::ubuntu::ubuntu_1404 (
 ) {
 
   file { '/etc/pam.d/':
