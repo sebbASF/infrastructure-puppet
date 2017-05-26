@@ -50,6 +50,11 @@ cron:
     minute: [10]
     hour: '0'
     command: 'cd /x1/gitbox/matt/tools/ && python json-stats.py'
+  ghadd:
+    user: 'root'
+    minute: [5,35]
+    hour: '*'
+    command: 'cd /x1/gitbox/matt/tools/ && lua ghadd.lua >> /var/log/ghadd.log' 
 
 datadog_agent::integrations::http_check::url: 'https://gitbox.apache.org/repos/asf'
 

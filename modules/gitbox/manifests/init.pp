@@ -12,7 +12,8 @@ class gitbox (
 # override below in eyaml
 
 $pbcsUser = '',
-$pbcsPwd  = ''
+$pbcsPwd  = '',
+$gh_token = '',
 
 ) {
 
@@ -51,6 +52,14 @@ $pbcsPwd  = ''
       group   => 'www-data',
       mode    => '0640',
       content => template('gitbox/private.py.erb');
+  }
+
+  file { '/x1/gitbox/matt/tokens/org_write.txt':
+      ensure  => 'present',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0600',
+      content => template('gitbox/org_write.txt.erb');
   }
 
   file {
