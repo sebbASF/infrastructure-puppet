@@ -8,12 +8,12 @@ class postfix_asf (
   create_resources(postfix::dbfile, $dbfile)
 
   exec { 'refresh_sender_access' :
-    command     => '/usr/sbin/postmap /etc/postfix/sender_access && /usr/sbin/postfix reload',
+    command     => '/usr/sbin/postmap /etc/sender_access.postfix && /usr/sbin/postfix reload',
     refreshonly => true,
   }
 
   file {
-    '/etc/postfix/sender_access':
+    '/etc/sender_access.postfix':
       ensure => file,
       mode   => '0644',
       owner  => 'root',
