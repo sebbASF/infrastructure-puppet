@@ -27,6 +27,7 @@ Arguments (optional):
     <security-realm> (optional)
     - restricted - file the mail under the directory defined by the 'restricteddir' config item
     - private    - file the mail under the directory defined by the 'privatedir' config item
+    - committers - file the mail under the directory defined by the 'committersdir' config item
     - anything else, file it under the directory defined by the 'archivedir' config item
 
    The above can be combined if required.
@@ -53,6 +54,7 @@ except:
     config = {
         'archivedir': '/x1/archives',
         'restricteddir': '/x1/restricted',
+        'committersdir': '/x1/committers',
         'dumpfile': '/x1/archives/bademails.txt'
     }
 
@@ -65,7 +67,7 @@ def valid_mail(m):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--lid", type=valid_mail, help="override list id")
-parser.add_argument("security", nargs='?') # e.g. restricted, private or omitted
+parser.add_argument("security", nargs='?') # e.g. restricted, private, committers or omitted
 args = parser.parse_args()
 
 def lock(fd):
@@ -145,6 +147,8 @@ def main():
             dochmod = False
         elif args.security == 'private':
             adir = config['privatedir']
+        elif args.security == 'committers':
+            adir = config['committersdir']
         # Construct a path to the mbox file
         fqdnpath = os.path.join(adir, fqdn)
         listpath = os.path.join(fqdnpath, listname)
