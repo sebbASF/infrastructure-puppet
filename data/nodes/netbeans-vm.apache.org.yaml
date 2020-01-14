@@ -94,8 +94,8 @@ vhosts_asf::vhosts::vhosts:
     ssl_proxyengine: true
     docroot:  '/var/www/html'
     access_log_format: 'combined'
-    access_log_file: "netbeans-vm_access.log"
-    error_log_file: "netbeans-vm_error.log"
+    access_log_file: 'netbeans-vm.apache.org_access.log'
+    error_log_file: 'netbeans-vm.apache.org_error.log'
     directories:
       -
         path: '/var/www/html'
