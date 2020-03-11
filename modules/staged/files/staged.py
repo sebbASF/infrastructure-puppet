@@ -12,7 +12,7 @@ import threading
 import json
 import socket
 
-PUBSUB_URL = 'http://gitpubsub.apache.org:2069/json/*'
+PUBSUB_URL = 'http://pubsub.apache.org:2069/'
 PUBSUB_QUEUE = {}
 GIT_CMD = '/usr/bin/git'
 ROOT_DIR = '/www'
