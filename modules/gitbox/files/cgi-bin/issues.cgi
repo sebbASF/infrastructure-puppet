@@ -206,7 +206,6 @@ def formatMessage(fmt, template = 'template.ezt'):
         'deleted':      "removed a comment on %(type)s",
         'diffcomment':  "commented on a change in %(type)s"
     }
-    fmt['action_raw'] = fmt['action']
     fmt['action'] = (subjects[fmt['action']] if fmt['action'] in subjects else subjects['comment']) % fmt
     fmt['subject'] = "%(user)s %(action)s #%(id)i: %(title)s" % fmt
     template = ezt.Template(template)
@@ -379,7 +378,7 @@ def main():
             act = fmt.get('type', 'issue')
             if act == 'pull request': act = 'pr'
             try:
-                requests.post('http://pubsub.apache.org:2069/github/%s/%s/%s.git/%s' % (act, project, repo, fmt.get('action_raw', 'unknown')), data = json.dumps({"payload": fmt}))
+                requests.post('http://pubsub.apache.org:2069/github/%s/%s/%s.git/%s' % (act, project, repo, fmt.get('action', 'unknown')), data = json.dumps({"payload": fmt}))
             except:
                 pass
         # Go ahead and generate the template
