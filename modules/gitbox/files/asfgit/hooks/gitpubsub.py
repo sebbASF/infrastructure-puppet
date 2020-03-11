@@ -94,11 +94,7 @@ def main():
 
 def send_json(data, key = "commit"):
     try:
-        requests.post("http://%s:%s%s" %
-                      (cfg.gitpubsub_host, cfg.gitpubsub_port, cfg.gitpubsub_path),
-                      data = json.dumps({key: data}))
-        
-        # New pubsub service - duplicate efforts for now
+        # pubsub.a.o payload
         requests.post("http://pubsub.apache.org:2069/git/%s/%s" % (cfg.repo_name, key),
                       data = json.dumps({key: data}))
     except:
