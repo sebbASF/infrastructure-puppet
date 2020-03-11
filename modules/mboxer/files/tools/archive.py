@@ -112,6 +112,17 @@ def dumpbad(what):
         f.write(b"\n")
         f.close() # implicitly releases the lock
 
+
+def redact(sender):
+    m = re.match(r"(.+)\s*<.+>", sender)
+    if m:
+        return m.group(1).strip()
+    m = re.match(r"<?(.)(.*)@(.+)>?", sender)
+    if m:
+        return "%s...@%s" % ( m.group(1), m.group(3) )
+    return '?@?'
+
+
 def main():
     input_stream = sys.stdin.buffer
     
@@ -200,7 +211,7 @@ def main():
                     'domain': fqdn,
                     'list': listname,
                     'list_full': '%s@%s' % ( listname, fqdn),
-                    'sender': msg.get('From'),
+                    'sender': redact(msg.get('From', '?@?')),
                     'subject': msg.get('Subject'),
                     'message-id': msg.get('Message-ID', ''),
                     'snippet': msgbody.msgbody(msg)[:200]
