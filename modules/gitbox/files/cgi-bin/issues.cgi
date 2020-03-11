@@ -206,6 +206,7 @@ def formatMessage(fmt, template = 'template.ezt'):
         'deleted':      "removed a comment on %(type)s",
         'diffcomment':  "commented on a change in %(type)s"
     }
+    fmt['action_raw'] = fmt['action']
     fmt['action'] = (subjects[fmt['action']] if fmt['action'] in subjects else subjects['comment']) % fmt
     fmt['subject'] = "%(user)s %(action)s #%(id)i: %(title)s" % fmt
     template = ezt.Template(template)
@@ -306,7 +307,7 @@ def main():
     data = json.loads(jsin)
 
     # Now check if this repo is hosted on GitBox (if not, abort):
-    if'repository' in data:
+    if 'repository' in data:
         repo = data['repository']['name']
         repopath = "/x1/repos/asf/%s.git" % repo
     else:
@@ -372,6 +373,13 @@ def main():
                 fmt[el] = None
         # Indent comment
         fmt['text'] = "\n".join("   %s" % x for x in fmt['text'].split("\n"))
+        
+        # If not infra, push event to pubsub also
+        if project not in ['infra', 'infrastructure']:
+            try:
+                requests.post('http://pubsub.apache.org:2069/github/%s/%s/%s.git/%s' % (fmt.get('type', 'issue'), project, repo, fmt.get('action_raw', 'unknown')), data = json.dumps({"payload": fmt}))
+            except:
+                pass
         # Go ahead and generate the template
         email = formatMessage(fmt)
     if email:
