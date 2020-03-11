@@ -333,11 +333,7 @@ def staging(cfg, yml):
                 'pusher': cfg.committer,
             }
         }
-        # Send to gitpubsub (for now)
-        requests.post("http://%s:%s%s" %
-                      (cfg.gitpubsub_host, cfg.gitpubsub_port, cfg.gitpubsub_path),
-                      data = json.dumps(payload))
-        
+
         # Send to pubsub.a.o
         requests.post("http://pubsub.apache.org:2069/staging/%s" % pname,
                       data = json.dumps(payload))
@@ -383,10 +379,7 @@ def publish(cfg, yml):
                 'target': target,
             }
         }
-        requests.post("http://%s:%s%s" %
-                      (cfg.gitpubsub_host, cfg.gitpubsub_port, cfg.gitpubsub_path),
-                      data = json.dumps(payload))
-        
+
         # Send to pubsub.a.o
         requests.post("http://pubsub.apache.org:2069/publish/%s" % pname,
                       data = json.dumps(payload))
