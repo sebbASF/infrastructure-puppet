@@ -214,7 +214,7 @@ def main():
                     'sender': redact(msg.get('From', '?@?')),
                     'subject': msg.get('Subject'),
                     'message-id': msg.get('Message-ID', ''),
-                    'snippet': msgbody.msgbody(msg)[:200]
+                    'snippet': msgbody.get_body(msg)[:200]
                 }
             }
             try:
