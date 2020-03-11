@@ -376,7 +376,8 @@ def main():
         # If not infra, push event to pubsub also
         if project not in ['infra', 'infrastructure']:
             act = fmt.get('type', 'issue')
-            if act == 'pull request': act = 'pr'
+            if act == 'pull request':
+                act = 'pr'
             try:
                 requests.post('http://pubsub.apache.org:2069/github/%s/%s/%s.git/%s' % (act, project, repo, fmt.get('action', 'unknown')), data = json.dumps({"payload": fmt}))
             except:
