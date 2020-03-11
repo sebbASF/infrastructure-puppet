@@ -60,6 +60,8 @@ import stat
 import fcntl
 import errno
 import argparse
+import msgbody
+import requests
 
 # Fetch config yaml
 cpath = os.path.dirname(os.path.realpath(__file__))
@@ -190,6 +192,24 @@ def main():
             f.write(b"\n")
             f.close() # Implicitly releases the lock
             os.chmod(path, stat.S_IWUSR | stat.S_IRUSR | stat.S_IROTH)
+        
+        # If public email on standard open channels, we can notify pypubsub
+        if not args.security and listname in ['user', 'users', 'dev', 'issues']:
+            payload = {
+                'email': {
+                    'domain': fqdn,
+                    'list': listname,
+                    'list_full': '%s@%s' % ( listname, fqdn),
+                    'sender': msg.get('From'),
+                    'subject': msg.get('Subject'),
+                    'message-id': msg.get('Message-ID', ''),
+                    'snippet': msgbody.msgbody(msg)[:200]
+                }
+            }
+            try:
+                rv = requests.post('http://pubsub.apache.org:2069/email/%s/%s' % (fqdn, listname), json = payload)
+            except:
+                pass
     else:
         # If we can't find a list for this, still valuable to print out what happened.
         # We shouldn't be getting emails we can't find a valid list for!
