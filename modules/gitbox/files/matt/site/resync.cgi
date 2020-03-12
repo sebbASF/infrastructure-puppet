@@ -27,7 +27,7 @@ if reponame:
     reponame = reponame.replace(".git", "")
     username = os.environ.get('REMOTE_USER', 'nobody')
     server = xform.getvalue("server", "git-wip-us")
-    requests.post("http://gitpubsub.apache.org:2069/json/", json = {
+    requests.post("http://pubsub.apache.org:2069/git/%s/commit" % reponame, json = {
             'commit': {
                 "repository": "git",
                 "server": server,
