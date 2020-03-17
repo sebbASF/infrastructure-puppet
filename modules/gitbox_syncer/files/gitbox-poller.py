@@ -188,7 +188,7 @@ def parse_payload(config, data):
                     # Send an email to users@infra.a.o with the bork
                     asfpy.messaging.mail(
                         recipient = '<private@infra.apache.org>',
-                        subject = "gitbox repository %s: push from unknown github user!" % reponame,
+                        subject = "[REVIEW NEEDED] github repository %s: push from unknown github user!" % reponame,
                         sender = '<gitbox@apache.org>',
                         message = tmpl_unknown_user % locals(),
                         )
