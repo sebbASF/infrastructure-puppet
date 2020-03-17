@@ -2633,12 +2633,12 @@ vhosts_asf::vhosts::vhosts:
           - 'Indexes'
           - 'FollowSymLinks'
           - 'MultiViews'
+        allow_override: FileInfo
     access_log_file: '/x1/logs/weblog.log'
     error_log_file: '/x1/logs/errorlog.log'
     custom_fragment: |
       # Change to infra.a.o later on.
       Redirect / https://infra.apache.org/
-      AllowOverride FileInfo
 
   infra-ssl:
     vhost_name: '*'
@@ -2657,10 +2657,10 @@ vhosts_asf::vhosts::vhosts:
           - 'Indexes'
           - 'FollowSymLinks'
           - 'MultiViews'
+        allow_override: FileInfo
     access_log_file: '/x1/logs/weblog.log'
     error_log_file: '/x1/logs/errorlog.log'
     custom_fragment: |
-      AllowOverride FileInfo
       # Proxying will go here...
       SSLProxyEngine on
       ProxyPass /self-serve/reporeq/ https://reporeq.apache.org/
