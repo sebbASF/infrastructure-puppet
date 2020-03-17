@@ -59,6 +59,9 @@ def parse_payload(config, data):
     The repository %(reponame)s was pushed to by a user not known to the
     gitbox/MATT system. The GitHub ID was: %(pusher)s. This is not supposed
     to happen, please check that the MATT system is operating correctly.
+    
+    link: https://github.com/apache/%(reponame)/commit/%(after)
+    
     With regards,
     gitbox.apache.org
     """
@@ -183,7 +186,7 @@ def parse_payload(config, data):
                 if '[bot]' not in pusher: # If not internal GitHub bot, complain!
                     # Send an email to users@infra.a.o with the bork
                     asfpy.messaging.mail(
-                        recipient = '<notifications@infra.apache.org>',
+                        recipient = '<private@infra.apache.org>',
                         subject = "gitbox repository %s: push from unknown github user!" % reponame,
                         sender = '<gitbox@apache.org>',
                         message = tmpl_unknown_user % locals(),
