@@ -2633,6 +2633,7 @@ vhosts_asf::vhosts::vhosts:
           - 'Indexes'
           - 'FollowSymLinks'
           - 'MultiViews'
+          - 'FileInfo'
     access_log_file: '/x1/logs/weblog.log'
     error_log_file: '/x1/logs/errorlog.log'
     custom_fragment: |
@@ -2656,6 +2657,7 @@ vhosts_asf::vhosts::vhosts:
           - 'Indexes'
           - 'FollowSymLinks'
           - 'MultiViews'
+          - 'FileInfo'
     access_log_file: '/x1/logs/weblog.log'
     error_log_file: '/x1/logs/errorlog.log'
     custom_fragment: |
