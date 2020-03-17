@@ -60,7 +60,8 @@ def parse_payload(config, data):
     gitbox/MATT system. The GitHub ID was: %(pusher)s. This is not supposed
     to happen, please check that the MATT system is operating correctly.
     
-    link: https://github.com/apache/%(reponame)/commit/%(after)
+    branch: %(ref)s
+    commit link: https://github.com/apache/%(reponame)s/commit/%(after)s
     
     With regards,
     gitbox.apache.org
@@ -191,6 +192,7 @@ def parse_payload(config, data):
                         sender = '<gitbox@apache.org>',
                         message = tmpl_unknown_user % locals(),
                         )
+                    asfid = 'not-in-ldap'
                     
                 else:
                     asfid = 'github-bot' # Set to the pusher ID for internal recording in case of github bots
