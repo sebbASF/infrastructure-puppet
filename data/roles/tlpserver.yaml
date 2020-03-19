@@ -40,8 +40,12 @@ classes:
   - vhosts_asf::vhosts
   - gitwcsub
 
+# keepalive timeouts set based on TLP server issues in Feb 5th 2020 relating to APT and other traffic
 apache::keepalive:                           'On'
-apache::keepalive_timeout:                   '30'
+apache::keepalive_timeout:                   '15'
+apache::max_keepalive_requests:              '2000'
+apache::timeout:                             '30'
+
 apache::default_vhost:                       false
 
 apache::default_ssl_cert:                    '/etc/ssl/certs/wildcard.apache.org.crt'
