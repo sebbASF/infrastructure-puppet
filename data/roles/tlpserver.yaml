@@ -42,7 +42,7 @@ classes:
 
 # keepalive timeouts set based on TLP server issues in Feb 5th 2020 relating to APT and other traffic
 apache::keepalive:                           'On'
-apache::keepalive_timeout:                   '15'
+apache::keepalive_timeout:                   '5'
 apache::max_keepalive_requests:              '2000'
 apache::timeout:                             '30'
 
