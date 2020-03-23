@@ -16,6 +16,9 @@ classes:
   - ulimit_asf
   - update_ca
 
+
+stunnel_asf::stunnel_port: 4443
+
 backuppc::client::manage_rsync: false
 backuppc::client::manage_sudo: false
 
