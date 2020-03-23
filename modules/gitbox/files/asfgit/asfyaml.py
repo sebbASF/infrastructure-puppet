@@ -113,6 +113,9 @@ def jekyll(cfg, yml):
     
     # Get optional theme
     theme = yml.get('theme', 'theme')
+
+    # Get optional outputdirectory name, Default 'output'
+    outputdir = yml.get('outputdir', 'output')
     
     # infer project name
     m = re.match(r"(?:incubator-)?([^-.]+)", cfg.repo_name)
@@ -138,6 +141,7 @@ def jekyll(cfg, yml):
             "source": "https://gitbox.apache.org/repos/asf/%s.git" % cfg.repo_name,
             "sourcebranch": ref,
             "outputbranch": target,
+            "outputdir": outputdir,
             "project": pname,
             "theme": theme,
             "notify": pnotify,
