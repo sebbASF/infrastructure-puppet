@@ -186,8 +186,8 @@ def removeGitHubTeamMember(teamID, login):
     if str(int(teamID)) != str(teamID):
         logging.warning("Bad Team ID passed!!")
         return None
-    if login.lower() == 'humbedooh':
-        logging.info("Not removing Mr. Humbedooh just yet")
+    if login.lower() == 'humbedooh' or login.startswith('asf-ci'):
+        logging.info("Not removing this account (infra)")
         return
     logging.info("- Removing %s from team #%s..." % (login, str(teamID)))
     url = "https://api.github.com/teams/%s/memberships/%s" % (teamID, login)
