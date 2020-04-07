@@ -37,6 +37,7 @@ letsencrypt::certonly:
     domains:
       - netbeans-vm.apache.org
       - bits.netbeans.org
+      - plugins.netbeans.apache.org
     plugin: apache
     webroot_paths:
       - /var/www/html
@@ -201,4 +202,48 @@ vhosts_asf::vhosts::vhosts:
         # As a fallaback also redirect all 404 files
         ErrorDocument 404 http://137.254.56.27%%{}{REQUEST_URI}
       </Directory>
+
+  plugins-netbeans-apache-org:
+    servername: 'plugins.netbeans.apache.org'
+    port: 80
+    docroot:  '/var/www/html/pluginportal'
+    access_log_format: 'combined'
+    access_log_file: 'plugins.netbeans.apache.org.log'
+    error_log_file: 'plugins.netbeans.apache.org_error.log'
+    directories:
+      -
+        path: '/var/www/html/pluginportal'
+        options:
+          - 'FollowSymLinks'
+          - 'MultiViews'
+        allow_override:
+          - 'All'
+        order: 'allow,deny'
+        allow: 'from all'
+    custom_fragment: |
+      Redirect permanent / https://plugins.netbeans.apache.org/
+
+  plugins-netbeans-apache-org-ssl:
+    servername: 'plugins.netbeans.apache.org'
+    port: 443
+    ssl: true
+    ssl_cert: '/etc/letsencrypt/live/plugins.netbeans.apache.org/cert.pem'
+    ssl_key:  '/etc/letsencrypt/live/plugins.netbeans.apache.org/privkey.pem'
+    ssl_chain: '/etc/letsencrypt/live/plugins.netbeans.apache.org/chain.pem'
+    ssl_proxyengine: true
+    docroot:  '/var/www/html/pluginportal'
+    access_log_format: 'combined'
+    access_log_file: 'plugins.netbeans.apache.org.log'
+    error_log_file: 'plugins.netbeans.apache.org_error.log'
+    directories:
+      -
+        path: '/var/www/html/pluginportal'
+        options:
+          - 'FollowSymLinks'
+          - 'MultiViews'
+        allow_override:
+          - 'All'
+        order: 'allow,deny'
+        allow: 'from all'
+
 
