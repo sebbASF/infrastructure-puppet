@@ -140,6 +140,7 @@ def listen():
                     branch = obj[what].get('branch', 'asf-site').replace('refs/heads/', '')
                     profile = obj[what].get('profile', '')
                     committer = obj[what].get('pusher', 'root')
+                    subdir = obj[what].get('subdir', '')
                     
                     # Staging dir
                     deploydir = project
@@ -153,6 +154,9 @@ def listen():
                             deploydir = obj[what].get('hostname')
                     
                     if (deploydir and source and branch):
+                        if subdir and re.match(r"^[-_a-zA-Z0-9/]+$", subdir):
+                            deploydir = os.path.join(deploydir, subdir)
+                            syslog.syslog(syslog.LOG_INFO, "Extending deployment dir %s with subdir %s" % (deploydir, subdir))
                         syslog.syslog(syslog.LOG_INFO, "Found deploy delivery for %s, deploying as %s" % (project, deploydir))
                         PUBSUB_QUEUE[deploydir] = [source, branch, committer]
                     
