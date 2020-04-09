@@ -324,6 +324,9 @@ def staging(cfg, yml):
         return
     
     subdir = yml.get('subdir', '')
+    if subdir:
+        if not re.match(r"^[-_a-zA-Z0-9/]+$", subdir):
+            raise Exception(".asf.yaml: Invalid subdir '%s' - Should be [-_A-Za-z0-9/]+ only!" % subdir)
     
     # Get profile from .asf.yaml, if present
     profile = yml.get('profile', '')
@@ -378,6 +381,9 @@ def publish(cfg, yml):
         return
     
     subdir = yml.get('subdir', '')
+    if subdir:
+        if not re.match(r"^[-_a-zA-Z0-9/]+$", subdir):
+            raise Exception(".asf.yaml: Invalid subdir '%s' - Should be [-_A-Za-z0-9/]+ only!" % subdir)
     
     # Try sending publish payload to pubsub
     try:
