@@ -323,6 +323,8 @@ def staging(cfg, yml):
     if whoami and whoami != ref:
         return
     
+    subdir = yml.get('subdir', '')
+    
     # Get profile from .asf.yaml, if present
     profile = yml.get('profile', '')
     
@@ -331,6 +333,7 @@ def staging(cfg, yml):
         payload = {
             'staging': {
                 'project': pname,
+                'subdir': subdir,
                 'source': "https://gitbox.apache.org/repos/asf/%s.git" % cfg.repo_name,
                 'branch': ref,
                 'profile': profile,
@@ -349,6 +352,7 @@ def staging(cfg, yml):
     except Exception as e:
         print(e)
         asfgit.log.exception()
+
 def publish(cfg, yml):
     """ Publishing for websites. Sample entry .asf.yaml entry:
       publish:
@@ -372,11 +376,15 @@ def publish(cfg, yml):
     whoami = yml.get('whoami')
     if whoami and whoami != ref:
         return
+    
+    subdir = yml.get('subdir', '')
+    
     # Try sending publish payload to pubsub
     try:
         payload = {
             'publish': {
                 'project': pname,
+                'subdir': subdir,
                 'source': "https://gitbox.apache.org/repos/asf/%s.git" % cfg.repo_name,
                 'branch': ref,
                 'pusher': cfg.committer,
