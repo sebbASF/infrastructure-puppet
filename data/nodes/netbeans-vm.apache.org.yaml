@@ -206,7 +206,7 @@ vhosts_asf::vhosts::vhosts:
   plugins-netbeans-apache-org:
     servername: 'plugins.netbeans.apache.org'
     port: 80
-    docroot:  '/space/pp3/public"
+    docroot:  '/space/pp3/public'
     access_log_format: 'combined'
     access_log_file: 'plugins.netbeans.apache.org.log'
     error_log_file: 'plugins.netbeans.apache.org_error.log'
