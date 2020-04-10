@@ -206,13 +206,13 @@ vhosts_asf::vhosts::vhosts:
   plugins-netbeans-apache-org:
     servername: 'plugins.netbeans.apache.org'
     port: 80
-    docroot:  '/var/www/html/pluginportal'
+    docroot:  '/space/pp3/public"
     access_log_format: 'combined'
     access_log_file: 'plugins.netbeans.apache.org.log'
     error_log_file: 'plugins.netbeans.apache.org_error.log'
     directories:
       -
-        path: '/var/www/html/pluginportal'
+        path: '/space/pp3/public'
         options:
           - 'FollowSymLinks'
           - 'MultiViews'
@@ -231,13 +231,13 @@ vhosts_asf::vhosts::vhosts:
     ssl_key:  '/etc/letsencrypt/live/plugins.netbeans.apache.org/privkey.pem'
     ssl_chain: '/etc/letsencrypt/live/plugins.netbeans.apache.org/chain.pem'
     ssl_proxyengine: true
-    docroot:  '/var/www/html/pluginportal'
+    docroot:  '/space/pp3/public'
     access_log_format: 'combined'
     access_log_file: 'plugins.netbeans.apache.org.log'
     error_log_file: 'plugins.netbeans.apache.org_error.log'
     directories:
       -
-        path: '/var/www/html/pluginportal'
+        path: '/space/pp3/public'
         options:
           - 'FollowSymLinks'
           - 'MultiViews'
